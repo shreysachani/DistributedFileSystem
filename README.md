@@ -3,8 +3,6 @@
 
 **Distributed File System** implemented using **C** and **socket programming** on **Linux**. This project uses a **three-server architecture** to transparently distribute files across multiple specialized servers, efficiently managing file operations based on file types and supporting multiple concurrent clients.
 
----
-
 ## Table of Contents
 
 - [Project Description](#project-description)
@@ -14,8 +12,6 @@
 - [How the System Works](#how-the-system-works)
 - [Supported Operations](#supported-operations)
 - [Notes](#notes)
-
----
 
 ## Project Description
 
@@ -31,7 +27,6 @@ Users interact only with **Smain**, which routes requests to the appropriate spe
 
 It is designed for **multiple concurrent clients** to ensure optimal performance and scalability.
 
----
 
 ## System Architecture
 
@@ -40,8 +35,6 @@ The DFS architecture comprises:
 1. **Smain**: The main server that acts as the primary user interface and routes requests to the specialized servers.
 2. **Spdf**: Specialized server for handling **PDF (.pdf)** files.
 3. **Stext**: Specialized server for managing **text (.txt)** files.
-
----
 
 ## Features
 
@@ -52,8 +45,6 @@ The DFS architecture comprises:
 - **Scalability**: Designed to handle increasing clients and server instances.
 - **Data integrity**: Ensures file consistency across servers.
 
----
-
 ## How to Run the Project
 
 ### Prerequisites
@@ -61,29 +52,39 @@ The DFS architecture comprises:
 - Linux environment
 - GCC (GNU Compiler Collection)
 
+
 ### Steps to Run
 
-1. Clone this repository:
+## Steps
+
+1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd distributed-file-system
+   git clone https://github.com/harshsabhaya/distributed-file-system
    ```
 
 2. Compile the source code:
    ```bash
-   gcc Smain.c -o Smain
-   gcc Spdf.c -o Spdf
-   gcc Stext.c -o Stext
+   gcc -o spdf Spdf.c
+   gcc -o stext Stext.c
+   gcc -o smain Smain.c
+   gcc -o client client.c
    ```
 
-3. Start the servers:
+3. Start the specialized servers: Open two separate terminal windows and run the following:
    ```bash
-   ./Smain
-   ./Spdf
-   ./Stext
+   ./spdf
+   ./stext
    ```
 
----
+4. Start the main server: Open another terminal window and run:
+   ```bash
+   ./smain
+   ```
+
+5. Run the client: In a separate terminal window, execute the client program:
+   ```bash
+   ./client
+   ```
 
 ## How the System Works
 
@@ -110,7 +111,6 @@ The DFS architecture comprises:
 
 - While processing, **Smain** continues to listen and queue new client requests.
 
----
 
 ## Supported Operations
 
@@ -122,10 +122,40 @@ The DFS architecture comprises:
 | `dtar`   | Creates and downloads a tar archive of specified file types          |
 | `display`| Lists files in a specified directory                                 |
 
----
+## Example Commands
+
+- To upload a file:
+
+```bash
+ufile <file-path>
+```
+
+- To download a file:
+
+```bash
+dfile <file-name>
+```
+
+- To remove a file:
+
+```bash
+rmfile <file-name>
+```
+
+- To create and download a tar archive of all `.pdf` files:
+
+```bash
+dtar pdf
+```
+
+- To display the files in a directory:
+
+```bash
+display <directory-path>
+```
+
 
 ## Notes
 
 This project was developed as part of the **COMP-8567** course to showcase concepts in **distributed systems**, **socket programming**, and **efficient file management**. While designed for educational purposes, it can be expanded to support additional file operations and server types.
 
---- 
