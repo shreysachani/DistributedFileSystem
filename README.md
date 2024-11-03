@@ -16,10 +16,10 @@
 ## Project Description
 
 The **Distributed File System (DFS)** consists of:
-- A **main server (Smain)** that interacts with users and routes requests internally.
-- Two **specialized servers**, **Spdf** and **Stext**, which manage **PDF** and **text** files, respectively.
+- A **main server (smain)** that interacts with users and routes requests internally.
+- Two **specialized servers**, **spdf** and **stext**, which manage **PDF** and **text** files, respectively.
 
-Users interact only with **Smain**, which routes requests to the appropriate specialized servers based on file type, providing a **transparent and efficient** experience. The system supports various file operations, including:
+Users interact only with **smain**, which routes requests to the appropriate specialized servers based on file type, providing a **transparent and efficient** experience. The system supports various file operations, including:
 - **Upload**
 - **Download**
 - **Removal**
@@ -32,9 +32,9 @@ It is designed for **multiple concurrent clients** to ensure optimal performance
 
 The DFS architecture comprises:
 
-1. **Smain**: The main server that acts as the primary user interface and routes requests to the specialized servers.
-2. **Spdf**: Specialized server for handling **PDF (.pdf)** files.
-3. **Stext**: Specialized server for managing **text (.txt)** files.
+1. **smain**: The main server that acts as the primary user interface and routes requests to the specialized servers.
+2. **spdf**: Specialized server for handling **PDF (.pdf)** files.
+3. **stext**: Specialized server for managing **text (.txt)** files.
 
 ## Features
 
@@ -59,29 +59,36 @@ The DFS architecture comprises:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/harshsabhaya/distributed-file-system
+   git clone https://github.com/shreysachani/DistributedFileSystem.git
    ```
 
-2. Compile the source code:
+2. Open new terminal and switch to client directory
    ```bash
-   gcc -o spdf Spdf.c
-   gcc -o stext Stext.c
-   gcc -o smain Smain.c
-   gcc -o client client.c
+   cd client
    ```
-
-3. Start the specialized servers: Open two separate terminal windows and run the following:
+   
+3. Change permission for compile.sh
+   ```bash
+   sudo chmod +x compile.sh
+   ```
+   
+4. Run compile.sh:
+   ```bash
+   ./compile.sh
+   ```
+   
+5. Start the specialized servers: Open two separate terminal windows and run the following:
    ```bash
    ./spdf
    ./stext
    ```
 
-4. Start the main server: Open another terminal window and run:
+6. Start the main server: Open another terminal window and run:
    ```bash
    ./smain
    ```
 
-5. Run the client: In a separate terminal window, execute the client program:
+7. Run the client: In a separate terminal window, execute the client program:
    ```bash
    ./client
    ```
@@ -94,22 +101,22 @@ The DFS architecture comprises:
 
 ### Concurrent Client Handling
 
-- **Smain** forks a new process for each client request, allowing concurrent processing.
+- **smain** forks a new process for each client request, allowing concurrent processing.
 
 ### File Type-based Distribution
 
-- **Smain** forwards requests based on file type:
+- **smain** forwards requests based on file type:
   - **.pdf** requests are handled by **Spdf**.
   - **.txt** requests go to **Stext**.
   - **.c** files are processed directly by **Smain**.
 
 ### On-Demand Connections
 
-- **Smain** only connects with **Spdf** and **Stext** when needed, optimizing resource usage.
+- **smain** only connects with **spdf** and **stext** when needed, optimizing resource usage.
 
 ### Request Queueing
 
-- While processing, **Smain** continues to listen and queue new client requests.
+- While processing, **smain** continues to listen and queue new client requests.
 
 
 ## Supported Operations
